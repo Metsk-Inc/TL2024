@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english,greek]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{xcolor}
+
+\title{Αναφορά Σχεδιασμού και Υλοποίησης Εφαρμογής}
+\author{Ομάδα\selectlanguage{english} Metsk Inc\vspace{1cm}\selectlanguage{greek}  \\
+        Ιορδάνης Τσουτσούλης Π2019117 \\
+        ΚωνσταντίνοςΖωγράφος\selectlanguage{english}inf2021058\selectlanguage{greek}\\
+        ΒασίλειοςΛάμπας\selectlanguage{english}inf2021118\selectlanguage{greek}}
+\date{2024}
+
+\begin{document}
+\maketitle
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\vspace{2cm}
+\tableofcontents
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+\hspace{19cm}
+
+
+\section{Εισαγωγή}
+Η παρούσα αναφορά περιγράφει τη σχεδίαση, υλοποίηση, ανάλυση και τα αποτελέσματα της εφαρμογής ανάλυσης δεδομένων.
+
+\section{Σχεδιασμός Εφαρμογής}
+Η εφαρμογή αναπτύχθηκε χρησιμοποιώντας Python και τις βιβλιοθήκες\selectlanguage{english} Streamlit, pandas, scikit-learn\selectlanguage{greek} και \selectlanguage{english}plotly\selectlanguage{greek}.
+
+\subsection{Αρχιτεκτονική}
+Η αρχιτεκτονική της εφαρμογής περιλαμβάνει τα ακόλουθα στοιχεία:
+\begin{itemize}
+   \selectlanguage{english}
+    \item \textbf{Streamlit}:\selectlanguage{greek} Χρησιμοποιείται για την ανάπτυξη της διεπαφής χρήστη.
+    \selectlanguage{english}
+    \item \textbf{pandas}:\selectlanguage{greek} Για τη διαχείριση και ανάλυση των δεδομένων.
+    \selectlanguage{english}
+    \item \textbf{scikit-learn}:\selectlanguage{greek} Για την εκπαίδευση μοντέλων μηχανικής μάθησης.
+    \selectlanguage{english}
+    \item \textbf{plotly}:\selectlanguage{greek} Για τη δημιουργία διαδραστικών διαγραμμάτων.
+\end{itemize}
+
+\section{Υλοποίηση}
+Η υλοποίηση της εφαρμογής περιλαμβάνει τα ακόλουθα βήματα:
+
+\subsection{Φόρτωση Δεδομένων}
+Η εφαρμογή επιτρέπει στους χρήστες να φορτώνουν αρχεία CSV ή Excel:
+
+\selectlanguage{english}
+\begin{minted}{python}
+import pandas as pd
+import streamlit as st
+
+uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
+if uploaded_file is not None:
+    data = pd.read_csv(uploaded_file)
+    st.write(data)
+\end{minted}
+\selectlanguage{greek}
+
+\subsection{Ανάλυση Δεδομένων}
+Περιλαμβάνει τον έλεγχο των προδιαγραφών των δεδομένων, την ανάλυση PCA και t-SNE, καθώς και την εκπαίδευση μοντέλων μηχανικής μάθησης. Ο κώδικας για την ανάλυση των δεδομένων περιλαμβάνει:
+
+\selectlanguage{english}
+\begin{minted}{python}
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+import plotly.express as px
+
+# PCA Analysis
+pca = PCA(n_components=2)
+principal_components = pca.fit_transform(data)
+fig_pca = px.scatter(principal_components, x=0, y=1, title='PCA Analysis')
+st.plotly_chart(fig_pca, use_container_width=True)
+
+# t-SNE Analysis
+tsne = TSNE(n_components=2)
+tsne_components = tsne.fit_transform(data)
+fig_tsne = px.scatter(tsne_components, x=0, y=1, title='t-SNE Analysis')
+st.plotly_chart(fig_tsne, use_container_width=True)
+\end{minted}
+\selectlanguage{greek}
+
+\section{Αποτελέσματα}
+Τα αποτελέσματα των αναλύσεων παρουσιάζονται με τη βοήθεια διαγραμμάτων.
+
+\selectlanguage{english}
+\vspace{1cm}
+
+\subsection{2D Visualization}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{pca_plot.png}
+    \caption{PCA Analysis}
+    \label{fig:pca}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{tsne_plot.png}
+    \caption{t-SNE Analysis}
+    \label{fig:tsne}
+\end{figure}
+
+\selectlanguage{greek}
+\hspace{10cm}
+\vspace{3cm}
+
+\section{Συμπεράσματα}
+Η εφαρμογή επιτυγχάνει την ανάλυση και οπτικοποίηση δεδομένων, παρέχοντας χρήσιμα αποτελέσματα και συγκρίσεις αλγορίθμων.
+
+\vspace{1em}
+
+\section{Συνεισφορά Ομάδας}
+Η συνεισφορά κάθε μέλους της ομάδας ήταν η εξής:
+\begin{itemize}
+    \item Ιορδάνης Τσουτσουλης: ασχολήθηκε με το διάβασμα των\selectlanguage{english} csv \selectlanguage{greek}\selectlanguage{english} excel\selectlanguage{greek} αρχείων
+    \item Κωνσταντίνος Ζωγράφος: ανέλαβε να βρει ποιούς αλγορίθμους\selectlanguage{english} clustering \selectlanguage{greek}και ομαδοποίησης θα χρησιμοποιήσουμε   
+    \item Βασίλειος Λάμπας :Aσχολήθηκε με τις τεχνικές οπτικοποίησης της εφαρμογής
+    \item Εφόσων είχαμε έτοιμο τον κώδικα της εργασίας μας συνεχίσαμε με το \selectlanguage{english}host\selectlanguage{greek} του\selectlanguage{english} site\selectlanguage{greek} χρησιμοποιώντας το \selectlanguage{english}Dockcer\selectlanguage{greek}. Επειτα φτιάξαμε και το\selectlanguage{english} Latex\selectlanguage{greek} αρχείο όπου αναφέραμε τα όσα κάναμε!
+\end{itemize}
+
+\section{\selectlanguage{english}UML\selectlanguage{greek} Διάγραμμα}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{uml_diagram.png}
+    \caption{ \selectlanguage{english}UML \selectlanguage{greek} Διάγραμμα της Εφαρμογής}
+    \label{fig:uml}
+\end{figure}
+
+\section{Κύκλος Ζωής Έκδοσης Λογισμικού}
+Το μοντέλο κύκλου ζωής που ακολουθήσαμε για την ανάπτυξη της εφαρμογής είναι το Agile. Το Agile επιτρέπει την ευέλικτη και σταδιακή ανάπτυξη, διευκολύνοντας τη συνεχή βελτίωση και προσαρμογή στις απαιτήσεις των χρηστών.
+
+\vspace{1cm}
+
+\subsection{\selectlanguage{english}Agile\selectlanguage{greek}Μεθοδολογία}
+Η Agile μεθοδολογία περιλαμβάνει τα ακόλουθα στάδια:
+\begin{itemize}
+    \item \textbf{Σχεδιασμός}: Καθορισμός των απαιτήσεων και σχεδιασμός της αρχιτεκτονικής.
+    \item \textbf{Ανάπτυξη}: Ανάπτυξη της εφαρμογής μέσω επαναληπτικών σπριντ.
+    \item \textbf{Δοκιμή}: Δοκιμή και βελτίωση της εφαρμογής σε κάθε σπριντ.
+    \item \textbf{Κυκλοφορία}: Διάθεση της εφαρμογής και υποστήριξη των χρηστών.
+\end{itemize}
+
+\end{document}
