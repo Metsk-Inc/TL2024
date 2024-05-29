@@ -12,8 +12,8 @@
 \title{Αναφορά Σχεδιασμού και Υλοποίησης Εφαρμογής}
 \author{Ομάδα\selectlanguage{english} Metsk Inc\vspace{1cm}\selectlanguage{greek}  \\
         Ιορδάνης Τσουτσούλης Π2019117 \\
-        ΚωνσταντίνοςΖωγράφος\selectlanguage{english}inf2021058\selectlanguage{greek}\\
-        ΒασίλειοςΛάμπας\selectlanguage{english}inf2021118\selectlanguage{greek}}
+        Κωνσταντίνος Ζωγράφος\selectlanguage{english} inf2021058\selectlanguage{greek}\\
+        Βασίλειος Λάμπας\selectlanguage{english} inf2021118\selectlanguage{greek}}
 \date{2024}
 
 \begin{document}
@@ -163,4 +163,10 @@ st.plotly_chart(fig_tsne, use_container_width=True)
     \item \textbf{Κυκλοφορία}: Διάθεση της εφαρμογής και υποστήριξη των χρηστών.
 \end{itemize}
 
+\section{\selectlanguage{english}Github}
+\selectlanguage{english}
+\url{https://github.com/Metsk-Inc/TL2024/tree/main/TL2}
+
+
 \end{document}
+
